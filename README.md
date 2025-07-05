@@ -3,7 +3,8 @@
 A command-line interface tool for building resumes with validation and PDF generation support.
 
 The following resume builder was used as a guideline for this project:
-https://github.com/king04aman/All-In-One-Python-Projects/tree/main/Resume%20Builder
+
+  https://github.com/king04aman/All-In-One-Python-Projects/tree/main/Resume%20Builder
 
 ---
 
