@@ -16,12 +16,13 @@ def main():
             text = "Please select which part of your resume you'd like to work on",
             values =[
                  (1, "Contact Info"),
-                 (2, "Experience"),
-                 (3, "Education"),
-                 (4, "Technical Skills"),
-                 (5, "Projects"),
-                 (6, "Generate Resume (PDF)"),
-                 (7, "Exit"),
+                 (2, "Summary"),
+                 (3, "Experience"),
+                 (4, "Education"),
+                 (5, "Technical Skills"),
+                 (6, "Projects"),
+                 (7, "Generate Resume (PDF)"),
+                 (8, "Exit"),
 
             ]
         ).run()
@@ -33,16 +34,18 @@ def main():
             case 1:
                 r.add_contact_info()
             case 2:
-                r.add_experience()
+                r.add_summary()
             case 3:
-                r.add_education()
+                r.add_experience()
             case 4:
-                r.add_technical_skills()
+                r.add_education()
             case 5:
-                r.add_projects()
+                r.add_technical_skills()
             case 6:
-                pdf.generate_pdf()
+                r.add_projects()
             case 7:
+                pdf.generate_pdf()
+            case 8:
                 print("Exiting....")
                 break
 
