@@ -9,6 +9,7 @@ class Resume_Data:
         self.validator = validator
         self._resume_data = {
             "contact_info":{},
+            "summary":[],
             "experience":[],
             "education":[],
             "technical_skills":[],
@@ -66,7 +67,14 @@ class Resume_Data:
                 break
         self.return_to_home()
 
-
+    def add_summary(self):
+        self.clear_screen()
+        print("Please add an introductory summary: ")
+        summary = {
+            "summary": prompt("Summary: ")
+        }
+        self._resume_data["summary"] = summary
+        self.return_to_home()
 
     def add_experience(self):
         while True:
@@ -153,7 +161,7 @@ class Resume_Data:
 
                         case "end_date":
                             try:
-                                datetime.strptime(value, "%Y-%m-%d")
+                                datetime.strptime(value, "%Y-%m")
                                 break
                             except ValueError:
                                 print("Invalid end date format. Please use YYYY-MM.")
@@ -173,8 +181,10 @@ class Resume_Data:
     def add_technical_skills(self):
         self.clear_screen()
         print("Enter skills. Please separate with a comma: ")
-        self._resume_data["technical_skills"].append(prompt("Skills: ").split(","))
+        skills = [skill.strip() for skill in prompt("Skills (comma-separated): ").split(",")]
+        self._resume_data["technical_skills"].extend(skills)
         self.return_to_home()
+
 
     def add_projects(self):
         while True:
@@ -202,7 +212,7 @@ class Resume_Data:
             }
             while True:
                 year = prompt("Year (e.g., 2022): ").strip()
-                if year.isdigit() and len(year) == 4 and int(year) < datetime.now(year):
+                if year.isdigit() and len(year) == 4 and 1900 <= int(year) <= datetime.now().year:
                     cert["year"] = year
                     break
                 else:
@@ -214,5 +224,3 @@ class Resume_Data:
             if more == "no":
                 break
         self.return_to_home()
-
-
