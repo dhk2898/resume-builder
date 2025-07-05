@@ -61,7 +61,3 @@ class Institution_Validator:
                     print("Invalid selection")
         else:
             return results[0]
-
-
-
-
