@@ -1,6 +1,7 @@
 from fpdf import FPDF
 
 class PDF_Builder:
+    # sanity check to make sure the resume data being passed in is valid. This should always be valid. 
     def __init__(self, resume_data):
         if not self.is_valid_resume_data(resume_data):
             raise ValueError("Invalid Resume Data")
@@ -12,6 +13,7 @@ class PDF_Builder:
     def is_valid_resume_data(self, data):
         required_keys = {
             "contact_info": dict,
+            "summary": str,
             "experience": list,
             "education": list,
             "technical_skills": list,
@@ -20,24 +22,23 @@ class PDF_Builder:
             }
         if not isinstance(data, dict):
             return False
-
         for key, expected_type in required_keys.items():
             if key not in data:
                 return False
             if not isinstance(data[key], expected_type):
                 return False
-
         return True
 
 
     def generate_pdf(self):
         self.pdf.add_page()
         self.add_header()
+        self.add_summary()
         self.add_experience()
         self.add_education()
         self.add_skills()
         self.add_certifications()
-        self.pdf.output(f"{self.data["contact_info"].get("name")}_resume.pdf")
+        self.pdf.output(f"{self.data['contact_info'].get('name', 'Unnamed')}_resume.pdf")
 
 
     def add_header(self):
@@ -61,6 +62,14 @@ class PDF_Builder:
         self.pdf.cell(0, 8, contact_line, ln=True, align="C")
         self.pdf.ln(5)
 
+    def add_summary(self):
+        summary = self.data.get("summary", "")
+        if summary:
+            self.section_title("Summary")
+            self.pdf.set_font("Arial", "", 10)
+            self.pdf.multi_cell(0, 6, summary)
+            self.pdf.ln(3)
+
     def add_experience(self):
         self.section_title("Experience")
         for exp in self.data.get("experience", []):
@@ -76,7 +85,7 @@ class PDF_Builder:
             for bullet in exp.get("description", "").split("\n"):
                 if bullet.strip():
                     self.pdf.cell(5)
-                    self.pdf.multi_cell(0, 5, f"{bullet.strip()}")
+                    self.pdf.multi_cell(0, 5, f"- {bullet.strip()}")
             self.pdf.ln(3)
 
     def add_education(self):
@@ -122,7 +131,7 @@ class PDF_Builder:
         self.pdf.cell(0, 6, left, ln=True)
         if right_top or right_bottom:
             self.pdf.set_font("Arial", "I", 9)
-            meta = ".".join(filter(None, [right_top, right_bottom]))
+            meta = ", ".join(filter(None, [right_top, right_bottom]))
             self.pdf.cell(0, 5, meta, ln=True)
 
 
