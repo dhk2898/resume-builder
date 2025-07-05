@@ -2,6 +2,8 @@ from resume_data import Resume_Data
 from pdf_builder import PDF_Builder
 from institution_validator import Institution_Validator
 
+# Dummy Data file to check formatting
+
 def fill_dummy_data(r):
     # Contact Info
     r._resume_data["contact_info"] = {
@@ -14,6 +16,10 @@ def fill_dummy_data(r):
         "location": "San Francisco, CA"
     }
 
+    r._resume_data["summary"] = (
+        "Experienced data analyst with a passion for turning data into strategic insights. "
+        "Skilled in dashboard creation, SQL, and stakeholder communication."
+    )
 
     # Experience
     r._resume_data["experience"] = [
@@ -24,14 +30,14 @@ def fill_dummy_data(r):
             "start_date": "01/2020",
             "end_date": "Present",
             "description": (
-                "- Built and maintained dashboards\n"
-                "- Conducted data audits\n"
-                "- Collaborated with business teams to define KPIs"
+                "Built and maintained dashboards\n"
+                "Conducted data audits\n"
+                "Collaborated with business teams to define KPIs"
             )
         }
     ]
 
-    # Education
+
     r._resume_data["education"] = [
         {
             "degree": "B.S. in Computer Science",
@@ -42,12 +48,11 @@ def fill_dummy_data(r):
         }
     ]
 
-    # Skills
+
     r._resume_data["technical_skills"] = [
         "Python", "SQL", "Tableau", "Excel", "Data Visualization"
     ]
 
-    # Certifications
     r._resume_data["certifications"] = [
         {
             "name": "Certified Data Analyst",
