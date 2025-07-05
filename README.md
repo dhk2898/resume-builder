@@ -53,10 +53,13 @@ The following resume builder was used as a guideline for this project:
 
 ## Dependencies
 
-validators: For validating emails
-requests: Used for validating schools with the Scorecard API (currently just schools in the USA)
-prompt_toolkit: A library for building beautiful command-line applications.
-fpdf: A library for generating PDF documents from the entered resume data.
+`validators`: For validating emails
+  
+`requests`: Used for validating schools with the Scorecard API (currently just schools in the USA)
+
+`prompt_toolkit`: A library for building beautiful command-line applications.
+  
+`fpdf`: A library for generating PDF documents from the entered resume data.
 
 ---
 
